@@ -2,7 +2,7 @@
 import { Logo } from "@/components/icons/Icons";
 import Link from "next/link";
 const Login = () => {
-  const BACKEND_ENDPOINT = "http://localhost:8888/sign-in";
+  const DATABASE_URL = "http://localhost:8888/sign-in";
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -19,7 +19,7 @@ const Login = () => {
       body: JSON.stringify(userData),
     };
 
-    const response = await fetch(BACKEND_ENDPOINT, option);
+    const response = await fetch(DATABASE_URL, option);
     const data = await response.json();
     console.log(data);
   };
