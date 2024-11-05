@@ -1,9 +1,10 @@
 "use client";
 import { Logo } from "@/components/icons/Icons";
 import Link from "next/link";
-const Login = () => {
-  const DATABASE_URL = "http://localhost:8888/sign-in";
 
+const Login = () => {
+  const DATABASE_URL = process.env.NEXT_PUBLIC_DATABASE_URL;
+  console.log(DATABASE_URL);
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     const userData = {
@@ -19,7 +20,7 @@ const Login = () => {
       body: JSON.stringify(userData),
     };
 
-    const response = await fetch(DATABASE_URL, option);
+    const response = await fetch(`${DATABASE_URL}/sign-in`, option);
     const data = await response.json();
     console.log(data);
   };

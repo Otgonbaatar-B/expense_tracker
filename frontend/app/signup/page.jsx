@@ -3,7 +3,7 @@ import { Logo } from "@/components/icons/Icons";
 import Link from "next/link";
 import { useState, useRef } from "react";
 const HomePage = () => {
-  const BACKEND_ENDPOINT = "http://localhost:8888/sign-up";
+  const BACKEND_ENDPOINT = "http://localhost:1111/sign-up";
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setReShowPassword] = useState(false);
 
