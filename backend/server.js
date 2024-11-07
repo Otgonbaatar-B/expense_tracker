@@ -33,14 +33,12 @@ app.get("/records", async (_, res) => {
 });
 
 app.post("/sign-in", async (request, response) => {
-  const { name, password } = request.body;
-  console.log("helaadsadhagd");
+  const { email, password } = request.body;
 
   try {
     const user = await sql`
-      SELECT * FROM users WHERE name = ${name} AND password = ${password}
+      SELECT * FROM users WHERE email = ${email} AND password = ${password}
     `;
-    console.log(user, "hello");
 
     if (user.length > 0) {
       response.json({
@@ -50,7 +48,7 @@ app.post("/sign-in", async (request, response) => {
     } else {
       response.json({
         success: false,
-        message: "Invalid username or password aaaa",
+        // message: "Invalid email or passworddd",
         user: user[0],
       });
     }
@@ -67,12 +65,13 @@ app.post("/sign-up", async (req, res) => {
 
   try {
     const existingUser = await sql`
-      SELECT * FROM users WHERE name = ${name} OR email = ${email}
+      SELECT * FROM users WHERE email = ${email}
     `;
 
     if (existingUser.length > 0) {
       return res.status(400).json({
         success: false,
+        exists: true,
         message: "Username or email already exists",
       });
     }
@@ -84,6 +83,7 @@ app.post("/sign-up", async (req, res) => {
 
     res.json({
       success: true,
+      exists: false,
       message: "User created successfully",
     });
   } catch (error) {
