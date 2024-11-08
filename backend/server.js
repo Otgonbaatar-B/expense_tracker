@@ -12,15 +12,12 @@ const PORT = process.env.PORT || 8000;
 app.use(bodyParser.json());
 app.use(cors());
 
-// Connect to Neon Database
 const sql = neon(`${process.env.DATABASE_URL}`);
 
-// Basic route
 app.get("/", (request, response) => {
   response.send("Hello GET huselt irlee");
 });
 
-// GET /records: Fetch records from the database
 app.get("/records", async (_, res) => {
   try {
     const response = await sql`SELECT * FROM record`;

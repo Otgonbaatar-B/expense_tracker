@@ -10,7 +10,7 @@ const Dashboard = () => {
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (isLoggedIn) {
-      toast.success("You already login");
+      toast.success("Amjilttai newterlee");
       router.push("/dashboard");
     }
   }, [router]);

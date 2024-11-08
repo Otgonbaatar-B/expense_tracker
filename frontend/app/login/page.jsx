@@ -5,8 +5,8 @@ import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useFormik } from "formik";
-import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const DATABASE_URL = process.env.NEXT_PUBLIC_DATABASE_URL;
