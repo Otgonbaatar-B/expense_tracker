@@ -20,38 +20,38 @@ const HomePage = () => {
   const alertTextRef = useRef(null);
   const alertIconRef = useRef(null);
 
-  const handleOnSubmit = async (event) => {
-    event.preventDefault();
+  // const handleOnSubmit = async (event) => {
+  //   event.preventDefault();
 
-    if (createPwRef.current.value === confirmPwRef.current.value) {
-      // alertTextRef.current.innerText = "Password matched";
-      alertIconRef.current.style.display = "none";
-      alertTextRef.current.style.color = "#4070F4";
-    } else {
-      alertTextRef.current.innerText = "Нууц үг таарахгүй байна";
-      alertIconRef.current.style.display = "block";
-      alertTextRef.current.style.color = "#D93025";
-      return;
-    }
+  //   if (createPwRef.current.value === confirmPwRef.current.value) {
+  //     // alertTextRef.current.innerText = "Password matched";
+  //     alertIconRef.current.style.display = "none";
+  //     alertTextRef.current.style.color = "#4070F4";
+  //   } else {
+  //     alertTextRef.current.innerText = "Нууц үг таарахгүй байна";
+  //     alertIconRef.current.style.display = "block";
+  //     alertTextRef.current.style.color = "#D93025";
+  //     return;
+  //   }
 
-    const userData = {
-      name: event.target.name.value,
-      email: event.target.email.value,
-      password: event.target.password.value,
-    };
+  //   const userData = {
+  //     name: event.target.name.value,
+  //     email: event.target.email.value,
+  //     password: event.target.password.value,
+  //   };
 
-    const option = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    };
+  //   const option = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(userData),
+  //   };
 
-    const response = await fetch(BACKEND_ENDPOINT, option);
-    const data = await response.json();
-    console.log(data);
-  };
+  //   const response = await fetch(BACKEND_ENDPOINT, option);
+  //   const data = await response.json();
+  //   console.log(data);
+  // };
 
   const formik = useFormik({
     initialValues: {
@@ -83,8 +83,18 @@ const HomePage = () => {
           toast.info("Already exists");
           console.log("Already exists");
         }
-        if (response.ok) {
-          router.push("/login");
+
+        if (data.success) {
+          console.log("Success triggered");
+          toast.success("Successfully created!");
+
+          // Reset form values after successful sign-up
+          formik.resetForm();
+
+          // Delay navigation to give time for the toast to display
+          // setTimeout(() => {
+          //   router.push("/login");
+          // }, 1000); // Adjust the delay as needed
         } else {
           setErrorMessage(data.message || "Error occurred");
         }
@@ -128,6 +138,8 @@ const HomePage = () => {
                     id="name"
                     className="w-[384px] h-[48px] bg-[#F3F4F6] pl-10 rounded-xl border border-gray-300"
                     placeholder="Name"
+                    onChange={formik.handleChange}
+                    value={formik.values.name}
                   />
                   <input
                     type="text"
@@ -165,6 +177,8 @@ const HomePage = () => {
                       ref={confirmPwRef}
                       className="w-[384px] h-[48px] bg-[#F3F4F6] pl-10 rounded-xl border border-gray-300"
                       placeholder="Password"
+                      onChange={formik.handleChange}
+                      value={formik.values.password}
                     />
                     <button
                       type="button" // Correctly set to type="button"

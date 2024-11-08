@@ -2,7 +2,7 @@
 import { Logo } from "@/components/icons/Icons";
 import Link from "next/link";
 import * as Yup from "yup";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useFormik } from "formik";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,10 +19,8 @@ const Login = () => {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string()
-        .min(6, "Password must be at least 6 characters")
-        .required("Required"),
+      email: Yup.string().email("Invalid email address"),
+      password: Yup.string().min(6, "Password must be at least 6 characters"),
     }),
     onSubmit: async (values) => {
       setErrorMessage("");
@@ -37,13 +35,12 @@ const Login = () => {
 
         const data = await response.json();
         console.log("data", data);
-
         if (response.ok && data.success) {
           toast.success("Login successful!");
           localStorage.setItem("isLoggedIn", "true");
           router.push("/dashboard");
         } else {
-          toast.error("Login failed!");
+          toast.info("Invalid password or email");
           // setErrorMessage(data.message || "Invalid credentials");
         }
       } catch (error) {
@@ -52,19 +49,11 @@ const Login = () => {
     },
   });
 
-  // useEffect(() => {
-  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  //   if (isLoggedIn) {
-  //     toast.success("you already login");
-  //     router.push("/dashboard");
-  //   }
-  // }, [router]);
-
   return (
     <div className="w-full">
       <ToastContainer />
       <div className="container grid grid-row grid-flow-col gap-4">
-        <div className="flex items-center justify-center ">
+        <div className="flex items-center justify-center grid-cols-2">
           <div className="flex items-center justify-center pl-52  w-[1220px] h-[1020px]">
             <div className="flex justify-center items-center flex-col w-[384px] h-[426px]">
               <div className="flex gap-2">
@@ -87,21 +76,23 @@ const Login = () => {
                     placeholder="Email "
                     onChange={formik.handleChange}
                     value={formik.values.email}
+                    onBlur={formik.handleBlur} // track blur event
                   />
-                  {formik.errors.email ? (
+                  {formik.touched.email && formik.errors.email && (
                     <div className="text-red-600">{formik.errors.email}</div>
-                  ) : null}
+                  )}
                   <input
-                    type="text"
+                    type="password"
                     name="password"
                     className=" w-[384px] h-[48px] bg-[#F3F4F6] pl-10 rounded-xl border border-gray-300"
                     placeholder="Password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
+                    onBlur={formik.handleBlur} // track blur event
                   />
-                  {formik.errors.password ? (
+                  {formik.touched.password && formik.errors.password && (
                     <div className="text-red-600">{formik.errors.password}</div>
-                  ) : null}
+                  )}
 
                   {errorMessage && (
                     <div className="mb-4 text-red-600">{errorMessage}</div>
