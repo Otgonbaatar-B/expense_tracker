@@ -15,7 +15,7 @@ const Dashboard = () => {
     }
   }, [router]);
   return (
-    <div>
+    <div className="h-screen border border-red-500">
       <ToastContainer />
       Dashboard
     </div>

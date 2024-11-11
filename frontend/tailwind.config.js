@@ -11,7 +11,17 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      screens: {
+        sm: "640px", // => @media (min-width: 640px) { ... }
+        md: "1024px", // => @media (min-width: 1024px) { ... }
+        lg: "1280px", // => @media (min-width: 1280px) { ... }
+        xl: "1536px", // => @media (min-width: 1536px) { ... }
+        "2xl": "1920px", // => @media (min-width: 1920px) { ... }
+      },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["#F3F4F6"],
+  },
 };
