@@ -11,16 +11,13 @@
   "dependencies": {
     "chart.js": "^4.4.6",
     "formik": "^2.4.6",
-<<<<<<< HEAD
     "next": "15.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-=======
     "next": "^15.0.0",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
->>>>>>> 211034b630c00ec1f74ed8ab46fd23776c084b03
     "react-toastify": "^10.0.6",
     "yup": "^1.4.0"
   },
