@@ -57,35 +57,37 @@ const Dashboard = () => {
   };
 
   return (
-<<<<<<< HEAD
     <div className="h-screen border border-red-500">
-=======
-    <div className="flex flex-col w-full h-auto">
-      <div className="flex w-full h-[72px] px-[120px] py-4 border bg-[#fff] justify-between">
-        <div className="flex gap-6">
-          <VectorIcon />
-          <button className="text-[#0F172A] text-base font-normal">
-            Dashboard
-          </button>
-          <button className="text-[#0F172A] text-base font-normal">
-            Records
-          </button>
+      <div className="flex flex-col w-full h-auto">
+        <div className="flex w-full h-[72px] px-[120px] py-4 border bg-[#fff] justify-between">
+          <div className="flex gap-6">
+            <VectorIcon />
+            <button className="text-[#0F172A] text-base font-normal">
+              Dashboard
+            </button>
+            <button className="text-[#0F172A] text-base font-normal">
+              Records
+            </button>
+          </div>
+          <div className="flex">
+            <button className="text-[#fff] text-base font-normal btn bg-blue-600 hover:bg-blue-500">
+              <Plus />
+              Record
+            </button>
+          </div>
         </div>
-        <div className="flex">
-          <button className="text-[#fff] text-base font-normal btn bg-blue-600 hover:bg-blue-500">
-            <Plus />
-            Record
-          </button>
-        </div>
+        <ToastContainer />
+
+        {/* Only show the dashboard and chart if user is logged in */}
+        {isLoggedIn && (
+          <div className="w-full h-auto mt-6 flex flex-col justify-center items-center">
+            <h1 className="text-2xl font-semibold mb-6">Welcome to the Dashboard</h1>
+            <div className="w-72 h-72">
+              <Doughnut data={data} options={options} />
+            </div>
+          </div>
+        )}
       </div>
->>>>>>> 211034b630c00ec1f74ed8ab46fd23776c084b03
-      <ToastContainer />
-      {/* {isLoggedIn && (
-        <div className="w-72 h-72">
-          <h1>Welcome to the Dashboard</h1>
-          <Doughnut data={data} options={options} />
-        </div>
-      )} */}
     </div>
   );
 };
