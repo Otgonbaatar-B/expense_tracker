@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
+        background: "var(--background)", // Default white background
         foreground: "var(--foreground)",
       },
       screens: {
@@ -20,8 +20,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: ["#F3F4F6"],
-  },
+  plugins: [],
 };
